@@ -28,15 +28,15 @@ const createProdutoSchema = async (database) => {
 
 const createProduto = async ({nome, preco, estoque, codigoDeBarras}) => {
 
-    let database = await connectDatabase(); 
-    await createProdutoSchema(database); 
-    const {Produto} = database.models; 
+    let database = await connectDatabase();
+    await createProdutoSchema(database);
+    const {Produto} = database.models;
     const produto = new Produto({
         nome,
         preco,
         estoque,
         codigoDeBarras
-    }); 
+    });
     produto.save();
     return produto;
 }

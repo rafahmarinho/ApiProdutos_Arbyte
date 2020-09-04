@@ -37,4 +37,4 @@ routes.delete('/produtos/delete/:id', (req, res) => {
         .catch(err => console.error(err));
 })
 
-module.exports = routes; 
+module.exports = routes;

@@ -1,0 +1,239 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "18.0.0",
+    "title": "Rafa/Dezembro",
+    "description": "Doc da API do Rafa que já mora em duas casas, uma aqui, uma em Dezembro",
+    "license": {
+      "name": "MIT",
+      "ult": "https://opensouce.org/licenses/MID"
+    }
+  },
+  "tags": [
+    {
+      "name": "Produtos",
+      "description": "Endpoints referentes ao domínio de produtos"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/produtos": {
+      "get": {
+        "tags": [
+          "Produtos"
+        ],
+        "summary": "Retorna todos os produtos cadastrados",
+        "responses": {
+          "200": {
+            "description": "Lista os produtos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Produtos"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Algo de errado não está certo"
+          }
+        }
+      }
+    },
+    "/produtos/create": {
+      "post": {
+        "tags": [
+          "Produtos"
+        ],
+        "summary": "Insere um novo produto no banco de dados",
+        "requestBody": {
+          "description": "Dados do produto",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Produto"
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Tudo certo! Produto cadastrado!"
+          },
+          "5XX": {
+            "description": "Algo de errado não está certo criando o produto"
+          }
+        }
+      }
+    },
+    "/produtos/update/{id}": {
+      "put": {
+        "tags": [
+          "Produtos"
+        ],
+        "summary": "Atualiza um produto no banco de dados",
+        "requestBody": {
+          "description": "Dados do produto",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Produto"
+              }
+            }
+          }
+        },
+        "parameters": [{
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "description": "ID do produto que eu quero atualizar",
+          "schema": {
+            "$ref": "#/definitions/id"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/UpdateResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Algo de errado não está certo atualizando o produto"
+          }
+        }
+      }
+    },
+    "/produtos/delete/{id}": {
+      "delete": {
+        "tags": [
+          "Produtos"
+        ],
+        "summary": "Remove um produto no banco de dados",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "ID do produto que eu quero atualizar",
+            "schema": {
+              "$ref": "#/definitions/id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/DeleteResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Algo de errado não está certo atualizando o produto"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Produtos": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "nome": {
+            "type": "String"
+          },
+          "preco": {
+            "type": "String"
+          },
+          "estoque": {
+            "type": "Number"
+          },
+          "codigoDeBarras": {
+            "type": "String"
+          }
+        }
+      }
+    },
+    "Produto": {
+      "type": "object",
+      "properties": {
+        "nome": {
+          "type": "String"
+        },
+        "preco": {
+          "type": "String"
+        },
+        "estoque": {
+          "type": "Number"
+        },
+        "codigoDeBarras": {
+          "type": "String"
+        }
+      }
+    },
+    "id": {
+      "properties": {
+        "_id": {
+          "type": "string"
+        }
+      }
+    },
+    "UpdateResponse": {
+      "type": "object",
+      "properties": {
+        "nome": {
+          "type": "String"
+        },
+        "preco": {
+          "type": "String"
+        },
+        "estoque": {
+          "type": "Number"
+        },
+        "codigoDeBarras": {
+          "type": "String"
+        }
+      }
+    },
+    "DeleteResponse": {
+      "type": "object",
+      "properties": {
+        "nome": {
+          "type": "String"
+        },
+        "preco": {
+          "type": "String"
+        },
+        "estoque": {
+          "type": "Number"
+        },
+        "codigoDeBarras": {
+          "type": "String"
+        }
+      }
+    }
+  }
+}
